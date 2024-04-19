@@ -21,6 +21,9 @@ func GetDataFromJson[T any](fileName string) (*T, error) {
 	}
 
 	var t T
-	json.Unmarshal(byteValue, &t)
+	err = json.Unmarshal(byteValue, &t)
+	if err != nil {
+		return nil, errors.New(err.Error())
+	}
 	return &t, nil
 }
