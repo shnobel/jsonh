@@ -3,6 +3,7 @@ package jsonh
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 	"io"
 	"os"
 )
@@ -23,7 +24,7 @@ func GetDataFromJson[T any](fileName string) (*T, error) {
 	var t T
 	err = json.Unmarshal(byteValue, &t)
 	if err != nil {
-		return nil, errors.New(err.Error())
+		return nil, fmt.Errorf("unmarshaling data into %T: %w", t, err)
 	}
 	return &t, nil
 }
